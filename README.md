@@ -14,8 +14,3 @@
     - column 5-7: name of best player 1, 2 and 3
 
 Each of these pipelines actually contain 2 use-cases. Therefore, we can either pick one focus (e.g. coaches, players or goalies) for each question. Alternatively, we can create 4 pipelines.
-
-## Pipeline Ideas
-- Which team has the most HOF players
-- Which player won the most games
-- Which goalie performs the best in shootouts
