@@ -38,5 +38,24 @@ CREATE TABLE IF NOT EXISTS assignment2.awards (
 )
 ```
 
-STEP 4:
+STEP 4: In Visual Studio Code
+```bash
+cd installation_script
+sh docker.sh
+sh docker_compose.sh
+```
+
+# Working on the project
+STEP 1: In Visual Studio Code
+```bash
+sudo docker-compose up -d
+```
+
+STEP 2: Start the spark master and workers
+```bash
+sudo docker logs spark-driver-app
+```
+- Copy the URL at the bottom of the output
+
+STEP 3: In the URL, change the part before the : to the external IP of your VM
 
