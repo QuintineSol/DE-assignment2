@@ -38,17 +38,19 @@ CREATE TABLE IF NOT EXISTS assignment2.awards (
 )
 ```
 
-STEP 4: In Visual Studio Code
+STEP 4: In your VM:
 ```bash
+git clone https://github.com/QuintineSol/DE-assignment2.git
 cd installation_script
 sh docker.sh
 sh docker_compose.sh
 ```
 
 # Working on the project
-STEP 1: In Visual Studio Code
+STEP 1: Start the docker container
 ```bash
-sudo docker-compose up -d
+sudo docker compose build
+sudo docker compose up -d
 ```
 
 STEP 2: Start the spark master and workers
