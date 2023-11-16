@@ -15,26 +15,26 @@
     - column 5-7: name of best player 1, 2 and 3
 
 # Setting up the project
-STEP 1: Add the datasets to a GCS bucket.
+STEP 1: Add the datasets to your GCS data bucket.
 
 STEP 2: Create a dataset in BigQuery.
 - Dataset ID: assignment2.
 - Region: us-central1.
 
 STEP 3: Create 2 tables.
-``bash
+```sql
 CREATE TABLE IF NOT EXISTS assignment2.goalie (
   name STRING,
   team STRING,
-  performance Float64,
+  performance Float64,
 )
 ```
-```bash
+```sql
 CREATE TABLE IF NOT EXISTS assignment2.awards (
  team STRING,
  year INT64,
  awards INT64,
- points INT64
+ points INT64
 )
 ```
 
@@ -74,4 +74,10 @@ STEP 5: Remove volumes of containers (optional: when you want to follow the labs
 ```bash
 sudo docker volume rm de-assignment2_notebooks de-assignment2_spark-checkpoint de-assignment2_spark-data
 ```
+
+# Web UIs
+- driver: http://VM_IP:4040/ 
+- master: http://VM_IP:8080/ 
+- worker 1: http://VM_IP:8081/
+- worker 2: http://VM_IP:8082/ 
 
