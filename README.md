@@ -38,13 +38,17 @@ CREATE TABLE IF NOT EXISTS assignment2.awards (
 )
 ```
 
-STEP 4: In your VM:
+STEP 4: In your VM
 ```bash
 git clone https://github.com/QuintineSol/DE-assignment2.git
 cd installation_script
 sh docker.sh
 sh docker_compose.sh
+cd ..
+nano .env
 ```
+- EXTERNAL_IP: of the VM
+- USER_HOME: everything before @ of green name in terminal
 
 # Working on the project
 STEP 1: Start the docker container
