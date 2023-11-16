@@ -51,17 +51,27 @@ nano .env
 - USER_HOME: everything before @ of green name in terminal
 
 # Working on the project
-STEP 1: Start the docker container
+STEP 1: Remove volumes of lab containers (since they overlap with the volumes of our containers)
+```bash
+sudo docker volume rm deployment_notebooks deployment_spark-checkpoint deployment_spark-data
+```
+
+STEP 2: Start the docker container
 ```bash
 sudo docker compose build
 sudo docker compose up -d
 ```
 
-STEP 2: Start the spark master and workers
+STEP 3: Start the spark master and workers
 ```bash
 sudo docker logs spark-driver-app
 ```
 - Copy the URL at the bottom of the output
 
-STEP 3: In the URL, change the part before the : to the external IP of your VM
+STEP 4: In the URL, change the IP (http://IP:port/lab?...) to the external IP of your VM
+
+STEP 5: Remove volumes of containers (optional: when you want to follow the labs again)
+```bash
+sudo docker volume rm de-assignment2_notebooks de-assignment2_spark-checkpoint de-assignment2_spark-data
+```
 
