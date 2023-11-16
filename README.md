@@ -1,16 +1,67 @@
 # Data Engineering - Assignment 2
 
 ## Pipeline 1
-- Use-case: Which team has the most coaches/players who received an award?
+- Use-case: How many award-winning coaches are in the top three ranked teams each year?
+- To what extent do award-winning coaches contribute to team optimal performance.
 - Visualisation: histogram with different colours
     - x-axis: teams
     - y-axis: amount of awards - one colour per category
 
 ## Pipeline 2
-- Use-case: Which player/goalie performs the best in shootouts for each team? 
+- Use-case: Which goalie performs the best in shootouts for each team between 2000 and 2011? 
 - Visualisation: table
     - column 1: team name
     - column 2-4: name of best goalie 1, 2 and 3
     - column 5-7: name of best player 1, 2 and 3
 
-Each of these pipelines actually contain 2 use-cases. Therefore, we can either pick one focus (e.g. coaches, players or goalies) for each question. Alternatively, we can create 4 pipelines.
+# Setting up the project
+STEP 1: Add the datasets to a GCS bucket.
+
+STEP 2: Create a dataset in BigQuery.
+- Dataset ID: assignment2.
+- Region: us-central1.
+
+STEP 3: Create 2 tables.
+``bash
+CREATE TABLE IF NOT EXISTS assignment2.goalie (
+  name STRING,
+  team STRING,
+  performance Float64,
+)
+```
+```bash
+CREATE TABLE IF NOT EXISTS assignment2.awards (
+ team STRING,
+ year INT64,
+ awards INT64,
+ points INT64
+)
+```
+
+STEP 4: In your VM
+```bash
+git clone https://github.com/QuintineSol/DE-assignment2.git
+cd installation_script
+sh docker.sh
+sh docker_compose.sh
+cd ..
+nano .env
+```
+- EXTERNAL_IP: of the VM
+- USER_HOME: everything before @ of green name in terminal
+
+# Working on the project
+STEP 1: Start the docker container
+```bash
+sudo docker compose build
+sudo docker compose up -d
+```
+
+STEP 2: Start the spark master and workers
+```bash
+sudo docker logs spark-driver-app
+```
+- Copy the URL at the bottom of the output
+
+STEP 3: In the URL, change the part before the : to the external IP of your VM
+
