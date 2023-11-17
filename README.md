@@ -14,6 +14,9 @@
     - column 2-4: name of best goalie 1, 2 and 3
     - column 5-7: name of best player 1, 2 and 3
 
+## ALternatives
+Which coach was best for each team over the years?
+
 # Setting up the project
 STEP 1: Add the datasets to a GCS bucket.
 
