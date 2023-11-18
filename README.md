@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS assignment2.awards (
 )
 ```
 
-STEP 4: In your VM
+STEP 4: In the Virtual Machine, enter the following commands:
 ```bash
 git clone https://github.com/QuintineSol/DE-assignment2.git
 cd installation_script
@@ -51,6 +51,8 @@ nano .env
 - USER_HOME: everything before @ of green name in terminal
 
 # Working on the project
+In the Virtual Machine.
+
 STEP 1: Remove volumes of lab containers (since they overlap with the volumes of our containers)
 ```bash
 sudo docker volume rm deployment_notebooks deployment_spark-checkpoint deployment_spark-data
@@ -62,7 +64,7 @@ sudo docker compose build
 sudo docker compose up -d
 ```
 
-STEP 3: Start the spark master and workers
+STEP 3: Access the spark master and workers
 ```bash
 sudo docker logs spark-driver-app
 ```
