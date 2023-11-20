@@ -1,18 +1,20 @@
 # Data Engineering - Assignment 2
 
 ## Pipeline 1
+- Use-case: Which goalie performs the best in shootouts for each team between 2000 and 2011? 
+- Visualisation: table
+    - column 1: team name
+    - column 2-4: name of best goalie 1, 2 and 3
+
+## Pipeline 2
 - Use-case: How many award-winning coaches are in the top three ranked teams each year?
 - To what extent do award-winning coaches contribute to team optimal performance.
 - Visualisation: histogram with different colours
     - x-axis: teams
     - y-axis: amount of awards - one colour per category
 
-## Pipeline 2
-- Use-case: Which goalie performs the best in shootouts for each team between 2000 and 2011? 
-- Visualisation: table
-    - column 1: team name
-    - column 2-4: name of best goalie 1, 2 and 3
-    - column 5-7: name of best player 1, 2 and 3
+## ALternatives
+Which three coaches were best for each team over the years?
 
 ## ALternatives
 Which coach was best for each team over the years?
@@ -25,19 +27,27 @@ STEP 2: Create a dataset in BigQuery.
 - Region: us-central1.
 
 STEP 3: Create 2 tables.
-``bash
-CREATE TABLE IF NOT EXISTS assignment2.goalie (
-  name STRING,
-  team STRING,
-  performance Float64,
+```sql
+CREATE TABLE IF NOT EXISTS assignment2.goalies (
+  playerID STRING,
+  tmID STRING,
+  totalSA INT,
+  totalGA INT,
+  performance FLOAT64,
+  fullName STRING,
+  age STRING,
+  playingYears STRING
 )
 ```
-```bash
-CREATE TABLE IF NOT EXISTS assignment2.awards (
- team STRING,
- year INT64,
- awards INT64,
- points INT64
+```sql
+CREATE TABLE IF NOT EXISTS assignment2.coaches (
+  year INT64,
+  tmID STRING,
+  name STRING,
+  Pts INT64,
+  ROW INT64,
+  dense_rank INT64,
+  no_awards INT64
 )
 ```
 
@@ -52,6 +62,12 @@ nano .env
 ```
 - EXTERNAL_IP: of the VM
 - USER_HOME: everything before @ of green name in terminal
+
+STEP 5: Add the pipeline notebooks to your notebooks folder.
+```bash
+cp goalies.ipynb ../notebooks
+cp coaches.ipynb ../notebooks
+```
 
 # Working on the project
 STEP 1: Remove volumes of lab containers (since they overlap with the volumes of our containers)
@@ -77,4 +93,3 @@ STEP 5: Remove volumes of containers (optional: when you want to follow the labs
 ```bash
 sudo docker volume rm de-assignment2_notebooks de-assignment2_spark-checkpoint de-assignment2_spark-data
 ```
-
