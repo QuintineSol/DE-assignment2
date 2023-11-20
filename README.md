@@ -1,21 +1,23 @@
 # Data Engineering - Assignment 2
 
 ## Pipeline 1
+- Use-case: Which goalie performs the best in shootouts for each team between 2000 and 2011? 
+- Visualisation: table
+    - column 1: team name
+    - column 2-4: name of best goalie 1, 2 and 3
+
+## Pipeline 2
 - Use-case: How many award-winning coaches are in the top three ranked teams each year?
 - To what extent do award-winning coaches contribute to team optimal performance.
 - Visualisation: histogram with different colours
     - x-axis: teams
     - y-axis: amount of awards - one colour per category
 
-## Pipeline 2
-- Use-case: Which goalie performs the best in shootouts for each team between 2000 and 2011? 
-- Visualisation: table
-    - column 1: team name
-    - column 2-4: name of best goalie 1, 2 and 3
-    - column 5-7: name of best player 1, 2 and 3
+## ALternatives
+Which three coaches were best for each team over the years?
 
 # Setting up the project
-STEP 1: Add the datasets to your GCS data bucket.
+STEP 1: Add the datasets to a GCS bucket.
 
 STEP 2: Create a dataset in BigQuery.
 - Dataset ID: assignment2.
@@ -23,22 +25,30 @@ STEP 2: Create a dataset in BigQuery.
 
 STEP 3: Create 2 tables.
 ```sql
-CREATE TABLE IF NOT EXISTS assignment2.goalie (
-  name STRING,
-  team STRING,
-  performance Float64,
+CREATE TABLE IF NOT EXISTS assignment2.goalies (
+  playerID STRING,
+  tmID STRING,
+  totalSA INT,
+  totalGA INT,
+  performance FLOAT64,
+  fullName STRING,
+  age STRING,
+  playingYears STRING
 )
 ```
 ```sql
-CREATE TABLE IF NOT EXISTS assignment2.awards (
- team STRING,
- year INT64,
- awards INT64,
- points INT64
+CREATE TABLE IF NOT EXISTS assignment2.coaches (
+  year INT64,
+  tmID STRING,
+  name STRING,
+  Pts INT64,
+  ROW INT64,
+  dense_rank INT64,
+  no_awards INT64
 )
 ```
 
-STEP 4: In the Virtual Machine, enter the following commands:
+STEP 4: In your VM
 ```bash
 git clone https://github.com/QuintineSol/DE-assignment2.git
 cd installation_script
@@ -50,9 +60,13 @@ nano .env
 - EXTERNAL_IP: of the VM
 - USER_HOME: everything before @ of green name in terminal
 
-# Working on the project
-In the Virtual Machine.
+STEP 5: Add the pipeline notebooks to your notebooks folder.
+```bash
+cp goalies.ipynb ../notebooks
+cp coaches.ipynb ../notebooks
+```
 
+# Working on the project
 STEP 1: Remove volumes of lab containers (since they overlap with the volumes of our containers)
 ```bash
 sudo docker volume rm deployment_notebooks deployment_spark-checkpoint deployment_spark-data
@@ -64,7 +78,7 @@ sudo docker compose build
 sudo docker compose up -d
 ```
 
-STEP 3: Access the spark master and workers
+STEP 3: Start the spark master and workers
 ```bash
 sudo docker logs spark-driver-app
 ```
@@ -76,10 +90,3 @@ STEP 5: Remove volumes of containers (optional: when you want to follow the labs
 ```bash
 sudo docker volume rm de-assignment2_notebooks de-assignment2_spark-checkpoint de-assignment2_spark-data
 ```
-
-# Web UIs
-- driver: http://VM_IP:4040/ 
-- master: http://VM_IP:8080/ 
-- worker 1: http://VM_IP:8081/
-- worker 2: http://VM_IP:8082/ 
-
