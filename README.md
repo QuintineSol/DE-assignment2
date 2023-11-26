@@ -30,13 +30,14 @@ STEP 3: Create 2 tables.
 ```sql
 CREATE TABLE IF NOT EXISTS assignment2.goalies (
   playerID STRING,
-  tmID STRING,
+  player_name STRING,
+  age STRING,
   totalSA INT,
   totalGA INT,
   performance FLOAT64,
-  fullName STRING,
-  age STRING,
-  playingYears STRING
+  playingYears STRING,
+  denseRank INT,
+  team_name STRING
 )
 ```
 ```sql
@@ -93,3 +94,30 @@ STEP 5: Remove volumes of containers (optional: when you want to follow the labs
 ```bash
 sudo docker volume rm de-assignment2_notebooks de-assignment2_spark-checkpoint de-assignment2_spark-data
 ```
+
+# Dashboard
+Goalies:
+1. Table
+- Dimension: team_name, player_name, age, playingYears - turn drill down off.
+- Metric: performance.
+- Sort: team_name (ascending).
+- Secondary sort: performance (descending).
+2. Histogram
+- Dimension: team_name - turn drill down off.
+- Breakdown dimension: denseRank.
+- Metric: performance.
+- Sort: team_name (ascending).
+- Secondary sort: performance (descending).
+
+Coaches:
+1. Table
+- Dimension: year, tmID, dense_rank - turn drill down off.
+- Metric: no_awards.
+- Sort: year (descending).
+- Secondary sort: dense_rank (ascending).
+2. Histogram
+- Dimension: year - turn drill down off.
+- Breakdown dimension: dense_rank.
+- Metric: no_awards.
+- Sort: year (ascending).
+- Secondary sort: dense_rank (ascending).
