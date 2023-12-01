@@ -1,23 +1,11 @@
 # Data Engineering - Assignment 2
+The project uses the following dataset: https://www.kaggle.com/datasets/open-source-sports/professional-hockey-database/data.
 
-## Pipeline 1
-- Use-case: Which goalie performs the best in shootouts for each team between 2000 and 2011? 
-- Visualisation: table
-    - column 1: team name
-    - column 2-4: name of best goalie 1, 2 and 3
+Pipeline 1: Which goalie performs the best in shootouts for each team? 
 
-## Pipeline 2
-- Use-case: How many award-winning coaches are in the top three ranked teams each year?
-- To what extent do award-winning coaches contribute to team optimal performance.
-- Visualisation: histogram with different colours
-    - x-axis: teams
-    - y-axis: amount of awards - one colour per category
+Pipeline 2: How many award-winning coaches are in the top three ranked teams each year?
 
-## ALternatives
-Which three coaches were best for each team over the years?
-
-## ALternatives
-Which coach was best for each team over the years?
+Dashboard: https://lookerstudio.google.com/reporting/c0b649fc-5801-4cb5-ba72-a96ab03f758c.
 
 # Setting up the project
 STEP 1: Add the datasets to a GCS bucket.
@@ -29,26 +17,28 @@ STEP 2: Create a dataset in BigQuery.
 STEP 3: Create 2 tables.
 ```sql
 CREATE TABLE IF NOT EXISTS assignment2.goalies (
+  tmID STRING,
   playerID STRING,
-  player_name STRING,
-  age STRING,
   totalSA INT,
   totalGA INT,
   performance FLOAT64,
-  playingYears STRING,
   denseRank INT,
+  player_name STRING,
+  age STRING,
+  playingYears STRING,
   team_name STRING
 )
 ```
 ```sql
 CREATE TABLE IF NOT EXISTS assignment2.coaches (
-  year INT64,
   tmID STRING,
+  year INT,
   name STRING,
-  Pts INT64,
-  ROW INT64,
-  dense_rank INT64,
-  no_awards INT64
+  Pts INT,
+  ROW INT,
+  dense_rank INT,
+  award STRING,
+  award_count BIGINT
 )
 ```
 
@@ -103,21 +93,21 @@ Goalies:
 - Sort: team_name (ascending).
 - Secondary sort: performance (descending).
 2. Histogram
-- Dimension: team_name - turn drill down off.
+- Dimension: tmID - turn drill down off.
 - Breakdown dimension: denseRank.
 - Metric: performance.
-- Sort: team_name (ascending).
+- Sort: tmID (ascending).
 - Secondary sort: performance (descending).
 
 Coaches:
 1. Table
-- Dimension: year, tmID, dense_rank - turn drill down off.
-- Metric: no_awards.
-- Sort: year (descending).
-- Secondary sort: dense_rank (ascending).
-2. Histogram
-- Dimension: year - turn drill down off.
-- Breakdown dimension: dense_rank.
-- Metric: no_awards.
+- Dimension: year, name, award, dense_rank - turn drill down off.
+- Metric: award_count.
 - Sort: year (ascending).
 - Secondary sort: dense_rank (ascending).
+2. Column Chart
+- Dimension: dense_rank - turn drill down off.
+- Breakdown dimension: award.
+- Metric: award_count.
+- Sort: dense_rank (ascending).
+- Secondary sort: award (ascending).
