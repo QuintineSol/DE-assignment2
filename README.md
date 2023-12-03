@@ -1,9 +1,9 @@
 # Data Engineering - Assignment 2
 The project uses the following dataset: https://www.kaggle.com/datasets/open-source-sports/professional-hockey-database/data.
 
-Pipeline 1: Which goalie performs the best in shootouts for each team? 
+Pipeline 1: How many award-winning coaches are in the top three ranked teams each year?
 
-Pipeline 2: How many award-winning coaches are in the top three ranked teams each year?
+Pipeline 2: Which goalie performs the best in shootouts for each team? 
 
 Dashboard: https://lookerstudio.google.com/reporting/c0b649fc-5801-4cb5-ba72-a96ab03f758c.
 
